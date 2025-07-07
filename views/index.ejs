@@ -1,41 +1,62 @@
 <main>
-    <section id="welcome">
-      <h2>Welcome to CSE Motors</h2>
-      <p>Your trusted source for quality vehicles. Explore our wide range of sedans, SUVs, trucks, and custom builds to find the perfect car for you.</p>
-    </section>
-    <section id="featured-vehicles">
-      <h2>Featured Vehicles</h2>
-      <div class="vehicle-grid">
-        <article>
-          <img src="/public/images/vehicles/adventador-tn.jpg" alt="White Lamborghini Aventador sports car">
-          <h3>Lamborghini Aventador</h3>
-          <p>Starting at $400,000</p>
-          <a href="/custom" title="View custom vehicle details">View Details</a>
-        </article>
-        <article>
-          <img src="/public/images/vehicles/aerocar-tn.jpg" alt="Yellow Aerocar flying vehicle with teal wings">
-          <h3>Aerocar</h3>
-          <p>Starting at $150,000</p>
-          <a href="/custom" title="View custom vehicle details">View Details</a>
-        </article>
-        <article>
-          <img src="/public/images/vehicles/batmobile-tn.jpg" alt="Black Batmobile with red accents">
-          <h3>Batmobile</h3>
-          <p>Starting at $1,000,000</p>
-          <a href="/custom" title="View custom vehicle details">View Details</a>
-        </article>
-        <article>
-          <img src="/public/images/vehicles/aerocar.jpg" alt="Black custom Pontiac G8 sports car">
-          <h3>Custom Pontiac G8</h3>
-          <p>Starting at $50,000</p>
-          <a href="/custom" title="View custom vehicle details">View Details</a>
-        </article>
-        <article>
-          <img src="/public/images/vehicles/crwn-vic.jpg" alt="White Ford Crown Victoria sedan">
-          <h3>Ford Crown Victoria</h3>
-          <p>Starting at $20,000</p>
-          <a href="/sedan" title="View sedan details">View Details</a>
-        </article>
+    <div class="delorean-container">
+      <h1>Welcome to CSE Motors!</h1>
+      <picture>
+        <source srcset="/images/vehicles/delorean-tn.jpg" media="(max-width: 300px)">
+        <img src="/images/vehicles/delorean.jpg" alt="DeLorean DMC-12 car with futuristic design" onerror="this.src='/images/vehicles/placeholder.jpg'; console.log('Image failed to load:', this.src);">
+      </picture>
+      <div class="delorean-info">
+        <h2>DMC DeLorean</h2>
+        <p>
+          3 Cup holders<br>
+          Superman doors<br>
+          Fuzzy dice
+        </p>
+        <button class="own-button">Own Today</button>
+      </div>
+    </div>
+    <div class="upgrades-section">
+        <h3>DeLorean Upgrades</h3>
+        <div class="upgrades-grid">
+          <div class="upgrade">
+            <picture>
+              <source srcset="/images/upgrades/flux-cap.png" media="(max-width: 300px)">
+              <img src="/images/upgrades/flux-cap.png" alt="DeLorean DMC-12 car with futuristic design" onerror="this.src='/images/upgrades/placeholder.jpg'; console.log('Image failed to load:', this.src);">
+            </picture>
+            <!-- <div class="upgrade"><img src="/images/flux-capacitor.jpg" alt="Flux Capacitor upgrade" onerror="this.src='/images/placeholder.jpg'; console.log('Image failed to load:', this.src);"><p>Flux Capacitor</p></div> -->
+            <p>Flux Capacitor</p>
+          </div>
+          <div class="upgrade">
+            <picture>
+              <source srcset="/images/upgrades/flame.jpg" media="(max-width: 300px)">
+              <img src="/images/upgrades/flame.jpg" alt="DeLorean DMC-12 car with futuristic design" onerror="this.src='/images/upgrades/placeholder.jpg'; console.log('Image failed to load:', this.src);">
+            </picture>
+            <p>Flame Decals</p>
+          </div>
+          <div class="upgrade">
+            <picture>
+              <source srcset="/images/upgrades/bumper.jpg" media="(max-width: 300px)">
+              <img src="/images/upgrades/bumper.jpg" alt="DeLorean DMC-12 car with futuristic design" onerror="this.src='/images/upgrades/placeholder.jpg'; console.log('Image failed to load:', this.src);">
+            </picture>
+            <p>Bumper Stickers</p>
+          </div>
+          <div class="upgrade">
+            <picture>
+              <source srcset="/images/upgrades/hub-cap.jpg" media="(max-width: 300px)">
+              <img src="/images/upgrades/hub-cap.jpg" alt="DeLorean DMC-12 car with futuristic design" onerror="this.src='/images/upgrades/placeholder.jpg'; console.log('Image failed to load:', this.src);">
+            </picture>
+          <p>Hub Caps</p>
+          </div>
+        </div>
+      <div class="reviews-section">
+        <h3>DMC DeLorean Reviews</h3>
+        <ul>
+          <li>★ "So fast! It’s almost like traveling in time!" (4/5)</li>
+          <li>★ "Coolest ride on the road!" (4/5)</li>
+          <li>★ "I’m feeling McFly!" (4/5)</li>
+          <li>★ "The most futuristic ride of our day!" (4/5)</li>
+          <li>★ "80’s livin and love it!" (5/5)</li>
+        </ul>
       </div>
     </section>
   </main>
