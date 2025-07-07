@@ -126,9 +126,10 @@ main {
 }
 .upgrades-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  color: #fff;
+  margin: 0px;
+  width: 50%;
 }
 .upgrade img {
   max-width: 80px;
@@ -144,4 +145,18 @@ main {
 }
 .reviews-section li {
   margin: 0.5rem 0;
+}
+.upgrade {
+background-color: #00a;
+gap: 10px;
+margin: 10px;
+padding: 10px
+}
+
+.delorean-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.upgrades-section{
+  display: flex;
 }
