@@ -81,32 +81,6 @@ main {
   padding: clamp(1rem, 5vw, 2rem) clamp(0.5rem, 3vw, 1rem);
 }
 
-#home-content {
-  border: 10px solid;
-  border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQoU2NkYGD4z8DAwMrAGoQBAxgH/EDAhCDAxYDGAcwB7wIMgQ4A6Q1UjO+3rLAAAAABJRU5ErkJggg==') 10 round;
-  padding: clamp(1rem, 4vw, 2rem);
-  text-align: center;
-  background-color: #fff;
-  color: #000;
-}
-
-#home-content h2 {
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
-  margin-bottom: 0.5rem;
-}
-
-#home-content p {
-  margin: 0.5rem 0;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-}
-
-#home-content img {
-  max-width: 100%;
-  height: auto;
-  margin: 1rem 0;
-  display: block; /* Prevent inline spacing issues */
-}
-
 .own-button {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -220,9 +194,9 @@ footer {
   }
 }
 
-@media (max-width: 480px) {
-  #home-content {
-    padding: 1rem;
+@media (max-width: 600px) {
+  .delorean-container img {
+    max-width: 75%; /* Smaller images on small screens */
   }
 
   .own-button {
