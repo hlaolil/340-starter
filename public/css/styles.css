@@ -1,110 +1,112 @@
+/* Reset default margins and ensure box-sizing for consistent sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* Ensure body doesn't overflow and fits viewport */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+/* Header styles */
 #top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem clamp(0.5rem, 3vw, 1.5rem); /* Responsive padding */
   background-color: #537e92;
   color: white;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
+
 .siteName a {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 4vw, 1.5rem); /* Responsive font size */
   text-decoration: none;
   color: white;
 }
+
 #tools a {
   color: white;
   text-decoration: none;
+  font-size: clamp(0.9rem, 3vw, 1rem);
 }
+
 #tools a:hover, .siteName a:hover {
   text-decoration: underline;
 }
-@media (max-width: 768px) {
-  #top-header {
-    flex-direction: column;
-    text-align: center;
-  }
-  #tools {
-    margin-top: 0.5rem;
-  }
+
+/* Navigation styles */
+nav {
+  background-color: grey;
 }
 
 nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  padding: 0;
+  padding: 0.5rem;
   margin: 1rem 0;
-  background-color: grey;
+  flex-wrap: wrap; /* Allow nav items to wrap on small screens */
 }
+
 nav li {
-  margin: 0 1rem;
+  margin: 0.5rem clamp(0.5rem, 2vw, 1rem);
 }
+
 nav a {
   text-decoration: none;
   color: white;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
   padding: 0.5rem 1rem;
   display: block;
 }
+
 nav a:hover, nav a:focus {
   background-color: #0056b3;
   color: #fff;
   text-decoration: underline;
 }
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-  nav li {
-    margin: 0.5rem 0;
-  }
-}
-nav {
-  color: grey;
-}
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #537e92;
-  color: white;
-  font-size: 1rem;
-}
-@media (max-width: 768px) {
-  footer {
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
-}
-
+/* Main content styles */
 main {
-  max-width: 1200px;
+  flex: 1; /* Allow main to grow and push footer down */
+  max-width: min(1200px, 100vw); /* Prevent overflow on large screens */
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: clamp(1rem, 5vw, 2rem) clamp(0.5rem, 3vw, 1rem);
 }
+
 #home-content {
   border: 10px solid;
-  border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQoU2NkYGD4z8DAwMrAGoQBAxgH/EDAhCDAxYDGAcwB7wIMgQ4A6Q1UjO+3rLAAAAABJRU5ErkJggg==') 10 round; /* Checkered pattern */
-  padding: 20px;
+  border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQoU2NkYGD4z8DAwMrAGoQBAxgH/EDAhCDAxYDGAcwB7wIMgQ4A6Q1UjO+3rLAAAAABJRU5ErkJggg==') 10 round;
+  padding: clamp(1rem, 4vw, 2rem);
   text-align: center;
   background-color: #fff;
   color: #000;
 }
+
 #home-content h2 {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
   margin-bottom: 0.5rem;
 }
+
 #home-content p {
   margin: 0.5rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
 }
+
 #home-content img {
   max-width: 100%;
   height: auto;
   margin: 1rem 0;
+  display: block; /* Prevent inline spacing issues */
 }
+
 .own-button {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -113,50 +115,133 @@ main {
   text-decoration: none;
   border-radius: 5px;
   margin: 1rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
 }
+
 .own-button:hover, .own-button:focus {
   background-color: #00a;
 }
+
+/* Upgrades and reviews sections */
 .upgrades-section, .reviews-section {
-  margin-top: 2rem;
+  margin-top: clamp(1.5rem, 5vw, 2rem);
 }
+
 .upgrades-section h3, .reviews-section h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   margin-bottom: 1rem;
 }
+
 .upgrades-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-rows: auto auto; /* Two rows, auto-sized */
+  gap: 1rem;
   color: #fff;
-  margin: 0px;
-  width: 50%;
+  max-width: 100%;
+  margin: 0;
+  justify-content: start;
 }
+
+.upgrade {
+  background-color: #00a;
+  padding: 1rem;
+  margin: 0; /* Remove margin to use grid gap */
+  border-radius: 5px;
+  text-align: center;
+}
+
 .upgrade img {
   max-width: 80px;
   height: auto;
   margin-bottom: 0.5rem;
 }
+
 .reviews-section ul {
   list-style: none;
   padding: 0;
   text-align: left;
   margin: 0 auto;
-  max-width: 300px;
-}
-.reviews-section li {
-  margin: 0.5rem 0;
-}
-.upgrade {
-background-color: #00a;
-gap: 10px;
-margin: 10px;
-padding: 10px
+  max-width: min(600px, 100%); /* Allow reviews to expand but not overflow */
 }
 
-.delorean-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.reviews-section li {
+  margin: 0.5rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
 }
-.upgrades-section{
-  display: flex;
+
+.delorean-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive 2-column grid */
+  gap: 1rem;
+  max-width: 100%;
+  margin: 1rem 0;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: clamp(0.5rem, 3vw, 1rem);
+  background-color: #537e92;
+  color: white;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  width: 100%;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  #top-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  #tools {
+    margin-top: 0.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  nav li {
+    margin: 0.5rem 0;
+  }
+
+  footer {
+    padding: 0.5rem;
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+  }
+
+  .upgrades-grid, .delorean-container {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  #home-content {
+    padding: 1rem;
+  }
+
+  .own-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .upgrade img {
+    max-width: 60px; /* Slightly smaller images on very small screens */
+  }
+}
+
+.upgrades-section {
+  display: grid;
+  grid-template-columns: auto 1fr; /* First column for h3, second for upgrades-grid */
+  grid-template-rows: auto; /* One row */
+  gap: 1rem;
+  max-width: 100%; /* Limit width to prevent stretching */
+  margin: 0; /* Align to the left */
+  justify-content: start; /* Ensure content starts at the left */
+  align-items: start; /* Align items at the top */
 }
