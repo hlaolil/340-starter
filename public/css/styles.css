@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem clamp(0.5rem, 3vw, 1.5rem); /* Responsive padding */
-  background-color: #537e92;
+  background-color: rgb(3, 37, 53);
   color: white;
   flex-wrap: wrap; /* Allow wrapping on small screens */
 }
@@ -43,7 +43,7 @@ body {
 
 /* Navigation styles */
 nav {
-  background-color: grey;
+  background-color: rgb(27, 27, 27);
 }
 
 nav ul {
@@ -156,7 +156,7 @@ main {
 footer {
   text-align: center;
   padding: clamp(0.5rem, 3vw, 1rem);
-  background-color: #537e92;
+  background-color: rgb(3, 37, 53);
   color: white;
   font-size: clamp(0.8rem, 3vw, 1rem);
   width: 100%;
