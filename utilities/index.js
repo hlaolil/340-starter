@@ -1,8 +1,4 @@
 const getNav = async () => {
-  return [
-    { name: 'Home', link: '/' },
-    { name: 'About', link: '/about' },
-    { name: 'Contact', link: '/contact' }
-  ];
+  return [];
 };
 module.exports = { getNav };
