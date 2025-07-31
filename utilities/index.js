@@ -79,10 +79,7 @@ Util.formatVehicleDetailHTML = async function (vehicle) {
         <p class="year">Year: ${vehicle.inv_year}</p>
         <p class="mileage">Mileage: ${formattedMileage} miles</p>
         <p class="color">Color: ${vehicle.inv_color}</p>
-        <p class="trim">Trim: ${vehicle.inv_trim || 'N/A'}</p>
-        <p class="vin">VIN: ${vehicle.inv_vin}</p>
         <p class="description">Description: ${vehicle.inv_description}</p>
-        <p class="created">Listed on: ${new Date(vehicle.inv_created_at).toLocaleDateString()}</p>
       </div>
     </div>
   `;
