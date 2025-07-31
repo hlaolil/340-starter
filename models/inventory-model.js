@@ -1,4 +1,4 @@
-const pool = require("../database/")
+const pool = require("../database")
 
 /* ***************************
  *  Get all classification data
@@ -25,4 +25,31 @@ async function getInventoryByClassificationId(classification_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId};
+/* ***************************
+ *  Get specific inventory item by inv_id
+ * ************************** */
+async function getVehicleById(inventoryId) {
+  try {
+    const data = await pool.query(
+      `SELECT 
+         inv_id,
+         inv_make,
+         inv_model,
+         inv_year,
+         inv_price,
+         inv_miles,
+         inv_description,
+         inv_image,
+         inv_color,
+       FROM public.inventory,
+       WHERE inv_id = $1`,
+      [inventoryId]
+    );
+    return data.rows[0] || null;
+  } catch (error) {
+    console.error("getVehicleById error: " + error);
+    return null;
+  }
+}
+
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById };
