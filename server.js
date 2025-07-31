@@ -10,7 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
-const utilities = require("./utilities/index");
+const utilities = require("./utilities/index")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 
@@ -54,8 +54,8 @@ app.use(async (err, req, res, next) => {
   })
 })
 
-const port = process.env.PORT
-const host = process.env.HOST
+const port = process.env.PORT || 5500
+const host = process.env.HOST || 'localhost'
 
 /* ***********************
  * Log statement to confirm server operation

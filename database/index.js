@@ -1,4 +1,4 @@
-const { Pool } = require("pg")
+const { Pool } = require("pg");
 require("dotenv").config()
 /* ***************
  * Connection Pool
@@ -29,9 +29,4 @@ module.exports = {
     }
   },
 }
-} else {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-  })
-  module.exports = pool
 }
