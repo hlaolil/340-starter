@@ -57,4 +57,32 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-module.exports = Util
+/* **************************************
+ * Build the vehicle detail view HTML
+ * ************************************ */
+Util.formatVehicleDetailHTML = async function (vehicle) {
+  if (!vehicle) return '<p class="notice">Sorry, no vehicle data available.</p>';
+
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(vehicle.inv_price);
+
+  const formattedMileage = new Intl.NumberFormat('en-US').format(vehicle.inv_miles);
+
+  return `
+    <div class="vehicle-detail-container">
+      <img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" class="vehicle-image">
+      <div class="vehicle-info">
+        <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
+        <p class="price">Price: ${formattedPrice}</p>
+        <p class="year">Year: ${vehicle.inv_year}</p>
+        <p class="mileage">Mileage: ${formattedMileage} miles</p>
+        <p class="color">Color: ${vehicle.inv_color}</p>
+        <p class="description">Description: ${vehicle.inv_description}</p>
+      </div>
+    </div>
+  `;
+};
+
+module.exports = Util;

@@ -1,32 +1,54 @@
-/* Reset default margins and ensure box-sizing for consistent sizing */
+/* ===== Reset and Base Styles ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Ensure body doesn't overflow and fits viewport */
 body {
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
+  color: #2c3e50;
 }
 
-/* Header styles */
+main {
+  flex: 1;
+  max-width: min(1200px, 100vw);
+  margin: 0 auto;
+  padding: clamp(1rem, 5vw, 2rem) clamp(0.5rem, 3vw, 1rem);
+}
+
+h1 {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.notice {
+  margin: 1rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: #d9534f;
+  text-align: center;
+}
+
+/* ===== Header & Navigation ===== */
+header,
 #top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem clamp(0.5rem, 3vw, 1.5rem); /* Responsive padding */
+  padding: 1rem clamp(0.5rem, 3vw, 1.5rem);
   background-color: rgb(3, 37, 53);
   color: white;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
+  flex-wrap: wrap;
 }
 
 .siteName a {
-  font-size: clamp(1.2rem, 4vw, 1.5rem); /* Responsive font size */
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   text-decoration: none;
   color: white;
 }
@@ -37,50 +59,50 @@ body {
   font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
-#tools a:hover, .siteName a:hover {
+#tools a:hover,
+.siteName a:hover {
   text-decoration: underline;
 }
 
-/* Navigation styles */
 nav {
   background-color: rgb(27, 27, 27);
 }
 
-nav ul {
+nav ul,
+header ul {
   list-style: none;
   display: flex;
   justify-content: center;
   padding: 0.5rem;
   margin: 1rem 0;
-  flex-wrap: wrap; /* Allow nav items to wrap on small screens */
+  flex-wrap: wrap;
 }
 
-nav li {
+nav li,
+header ul li {
   margin: 0.5rem clamp(0.5rem, 2vw, 1rem);
 }
 
-nav a {
+nav a,
+header ul li a {
   text-decoration: none;
   color: white;
   font-size: clamp(0.9rem, 3vw, 1rem);
   padding: 0.5rem 1rem;
   display: block;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-nav a:hover, nav a:focus {
+nav a:hover,
+nav a:focus,
+header ul li a:hover,
+header ul li a:focus {
   background-color: #0056b3;
   color: #fff;
   text-decoration: underline;
 }
 
-/* Main content styles */
-main {
-  flex: 1; /* Allow main to grow and push footer down */
-  max-width: min(1200px, 100vw); /* Prevent overflow on large screens */
-  margin: 0 auto;
-  padding: clamp(1rem, 5vw, 2rem) clamp(0.5rem, 3vw, 1rem);
-}
-
+/* ===== Home View ===== */
 .own-button {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -92,35 +114,33 @@ main {
   font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
-.own-button:hover, .own-button:focus {
+.own-button:hover,
+.own-button:focus {
   background-color: #00a;
 }
 
-/* Upgrades and reviews sections */
-.upgrades-section, .reviews-section {
+.upgrades-section,
+.reviews-section {
   margin-top: clamp(1.5rem, 5vw, 2rem);
 }
 
-.upgrades-section h3, .reviews-section h3 {
+.upgrades-section h3,
+.reviews-section h3 {
   font-size: clamp(1.2rem, 4vw, 1.5rem);
   margin-bottom: 1rem;
 }
 
 .upgrades-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  grid-template-rows: auto auto; /* Two rows, auto-sized */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 1rem;
   color: #fff;
-  max-width: 100%;
-  margin: 0;
-  justify-content: start;
 }
 
 .upgrade {
   background-color: #00a;
   padding: 1rem;
-  margin: 0; /* Remove margin to use grid gap */
   border-radius: 5px;
   text-align: center;
 }
@@ -136,7 +156,7 @@ main {
   padding: 0;
   text-align: left;
   margin: 0 auto;
-  max-width: min(600px, 100%); /* Allow reviews to expand but not overflow */
+  max-width: min(600px, 100%);
 }
 
 .reviews-section li {
@@ -146,13 +166,94 @@ main {
 
 .delorean-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive 2-column grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
-  max-width: 100%;
   margin: 1rem 0;
 }
 
-/* Footer styles */
+/* ===== Classification View ===== */
+#inv-display {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+#inv-display li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+
+#inv-display li:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#inv-display li img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Detail View ===== */
+.vehicle-detail-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  margin: 1rem 0;
+}
+
+.vehicle-image {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+}
+
+.namePrice {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 0.5rem;
+}
+
+.namePrice h2 {
+  margin: 0.5rem 0;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  color: #2c3e50;
+}
+
+.namePrice .price,
+.namePrice .year,
+.namePrice .mileage {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  font-weight: bold;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.namePrice span,
+.namePrice p {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+}
+
+.namePrice h2 a {
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.namePrice h2 a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Footer ===== */
 footer {
   text-align: center;
   padding: clamp(0.5rem, 3vw, 1rem);
@@ -162,8 +263,9 @@ footer {
   width: 100%;
 }
 
-/* Media queries for smaller screens */
+/* ===== Responsive Breakpoints ===== */
 @media (max-width: 768px) {
+  header,
   #top-header {
     flex-direction: column;
     text-align: center;
@@ -174,29 +276,38 @@ footer {
     margin-top: 0.5rem;
   }
 
-  nav ul {
+  nav ul,
+  header ul {
     flex-direction: column;
     align-items: center;
     padding: 0.5rem 0;
   }
 
-  nav li {
+  nav li,
+  header ul li {
     margin: 0.5rem 0;
+  }
+
+  .vehicle-detail-container {
+    flex-direction: column;
+  }
+
+  .upgrades-grid,
+  .delorean-container {
+    grid-template-columns: 1fr;
   }
 
   footer {
     padding: 0.5rem;
     font-size: clamp(0.7rem, 2.5vw, 0.9rem);
   }
-
-  .upgrades-grid, .delorean-container {
-    grid-template-columns: 1fr; /* Stack columns on smaller screens */
-  }
 }
 
 @media (max-width: 600px) {
-  .delorean-container img {
-    max-width: 75%; /* Smaller images on small screens */
+  .delorean-container img,
+  .vehicle-image {
+    max-width: 75%;
+    margin: 0 auto;
   }
 
   .own-button {
@@ -205,17 +316,6 @@ footer {
   }
 
   .upgrade img {
-    max-width: 60px; /* Slightly smaller images on very small screens */
+    max-width: 60px;
   }
-}
-
-.upgrades-section {
-  display: grid;
-  grid-template-columns: auto 1fr; /* First column for h3, second for upgrades-grid */
-  grid-template-rows: auto; /* One row */
-  gap: 1rem;
-  max-width: 100%; /* Limit width to prevent stretching */
-  margin: 0; /* Align to the left */
-  justify-content: start; /* Ensure content starts at the left */
-  align-items: start; /* Align items at the top */
 }
