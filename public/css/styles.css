@@ -67,7 +67,7 @@ header,
 /* Navigation Bar */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1rem;
   background-color: rgb(27, 27, 27);
@@ -110,7 +110,6 @@ header,
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  z-index: 1000;
 }
 
 .navbar .hamburger span {
@@ -149,7 +148,6 @@ header,
     width: 25%;
     background-color: rgb(27, 27, 27);
     padding: 1rem;
-    z-index: 999;
   }
 
   .navbar .nav-links.active {
