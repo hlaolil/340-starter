@@ -64,42 +64,105 @@ header,
   text-decoration: underline;
 }
 
-nav {
-  background-color: rgb(27, 27, 27);
-}
-
-nav ul,
-header ul {
-  list-style: none;
+/* Navigation Bar */
+.navbar {
   display: flex;
-  justify-content: center;
-  padding: 0.5rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(27, 27, 27);
+  color: #fff;
+  margin: 30px 0;
 }
 
-nav li,
-header ul li {
-  margin: 0.5rem clamp(0.5rem, 2vw, 1rem);
+/* Navigation Links */
+.navbar .nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-nav a,
-header ul li a {
+.navbar .nav-links li {
+  margin: 0 1rem;
+}
+
+.navbar .nav-links a {
+  color: #fff;
   text-decoration: none;
-  color: white;
-  font-size: clamp(0.9rem, 3vw, 1rem);
+  font-size: 1rem;
   padding: 0.5rem 1rem;
   display: block;
   transition: background-color 0.3s, color 0.3s;
 }
 
-nav a:hover,
-nav a:focus,
-header ul li a:hover,
-header ul li a:focus {
+.navbar .nav-links a:hover,
+.navbar .nav-links a:focus {
   background-color: #0056b3;
   color: #fff;
   text-decoration: underline;
+}
+
+/* Hamburger Icon */
+.navbar .hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1000;
+}
+
+.navbar .hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger to X animation */
+.navbar .hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.navbar .hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar .hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+  .navbar .hamburger {
+    display: block;
+  }
+
+  .navbar .nav-links {
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 25%;
+    background-color: rgb(27, 27, 27);
+    padding: 1rem;
+    z-index: 999;
+  }
+
+  .navbar .nav-links.active {
+    display: block;
+  }
+
+  .navbar .nav-links ul {
+    flex-direction: column;
+  }
+
+  .navbar .nav-links li {
+    margin: 0.5rem 0;
+  }
 }
 
 /* ===== Home View ===== */
@@ -199,21 +262,27 @@ header ul li a:focus {
   margin-bottom: 0.5rem;
 }
 
-/* ===== Detail View ===== */
+/* Detail view styles */
 .vehicle-detail-container {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem 0;
   background-color: #fff;
-  padding: 1rem;
   border: 1px solid #ddd;
-  margin: 1rem 0;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  align-items: flex-start;
 }
 
-.vehicle-image {
-  max-width: 600px;
+.vehicle-detail-container img {
   width: 100%;
+  max-width: 600px;
   height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
 }
 
 .namePrice {
@@ -274,18 +343,6 @@ footer {
 
   #tools {
     margin-top: 0.5rem;
-  }
-
-  nav ul,
-  header ul {
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem 0;
-  }
-
-  nav li,
-  header ul li {
-    margin: 0.5rem 0;
   }
 
   .vehicle-detail-container {
