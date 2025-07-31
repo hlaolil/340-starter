@@ -72,6 +72,7 @@ header,
   padding: 1rem;
   background-color: rgb(27, 27, 27);
   color: #fff;
+  margin: 30px 0;
 }
 
 /* Navigation Links */
@@ -143,9 +144,9 @@ header,
   .navbar .nav-links {
     display: none;
     position: absolute;
-    top: 60px;
+    top: 200px;
     left: 0;
-    width: 100%;
+    width: 25%;
     background-color: rgb(27, 27, 27);
     padding: 1rem;
     z-index: 999;
