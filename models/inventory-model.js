@@ -40,8 +40,8 @@ async function getVehicleById(inventoryId) {
          inv_miles,
          inv_description,
          inv_image,
-         inv_color,
-       FROM public.inventory,
+         inv_color
+       FROM public.inventory
        WHERE inv_id = $1`,
       [inventoryId]
     );
