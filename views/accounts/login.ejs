@@ -1,2 +1,14 @@
-<h1><%= title %></h1> <!-- Main page heading using title -->
-  <p><%= message %></p> <!-- Error message -->
+<h1><%= title %></h1>
+  <% if (message) { %>
+    <p class="notice"><%= message %></p>
+  <% } %>
+  <form action="/accounts/login" method="POST" class="login-form">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required aria-label="Enter your email address">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required aria-label="Enter your password">
+    <button type="submit" class="login-button">Log In</button>
+  </form>
+  <p class="register-link">
+    Don't have an account? <a href="/accounts/register" aria-label="Register for a new account">Sign Up</a>
+  </p>

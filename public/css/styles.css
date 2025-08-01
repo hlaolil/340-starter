@@ -377,3 +377,77 @@ color: #fff;
     max-width: 60px;
   }
 }
+
+.notice {
+  margin: 1rem 0;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: #d9534f;
+  text-align: center;
+}
+
+/* Login Form */
+.login-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+  display: block;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+}
+
+.login-form .login-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form .login-button:hover,
+.login-form .login-button:focus {
+  background-color: #003d82;
+}
+
+.register-link {
+  text-align: center;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  margin-top: 1rem;
+}
+
+.register-link a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.register-link a:hover,
+.register-link a:focus {
+  text-decoration: underline;
+}
