@@ -10,7 +10,7 @@ async function buildLogin(req, res, next) {
   res.render("accounts/login", {
     title: "Login",
     nav,
-    message: req.flash("notice", "message") || null
+    message: req.flash("notice") [0] || null
   });
 } catch (err) {
     next(err);
