@@ -10,7 +10,8 @@ async function buildLogin(req, res, next) {
   res.render("accounts/login", {
     title: "Login",
     nav,
-    message: req.flash("notice") [0] || null
+    message: req.flash("notice")[0] || "",
+    errors: null
   });
 };
 
@@ -22,7 +23,8 @@ async function buildRegister(req, res, next) {
   res.render("accounts/register", {
     title: "Register",
     nav,
-    message: req.flash("notice") [0] || null
+    message: req.flash("notice")[0] || "",
+    errors: null
   });
 }
 
@@ -48,14 +50,16 @@ async function registerAccount(req, res) {
     res.status(201).render("accounts/login", {
       title: "Login",
       nav,
-      message: req.flash("notice") [0] || null
+      message: req.flash("notice")[0] || "",
+      errors: null
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("accounts/register", {
       title: "Registration",
       nav,
-      message: req.flash("notice") [0] || null
+      message: req.flash("notice")[0] || "",
+      errors: null
     })
   }
 }

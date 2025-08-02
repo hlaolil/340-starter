@@ -1,7 +1,20 @@
+<% if (title) { %>
 <h1><%= title %></h1>
-  <% if (message) { %>
-    <p class="notice"><%= message %></p>
-  <% } %>
+<% } else {
+  res.redirect('/')
+} %>
+
+    <%- message %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+  <p>All fields are required</p>
   <form action="/accounts/register" method="POST" class="register-form">
     <label for="account_firstname">First Name</label>
     <input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.account_firstname || '' %>" aria-label="Enter your first name">
