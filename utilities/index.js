@@ -1,10 +1,10 @@
 const invModel = require("../models/inventory-model")
-const Util = {}
+const utilities = {}
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
-Util.getNav = async function (req, res, next) {
+utilities.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
@@ -27,7 +27,7 @@ Util.getNav = async function (req, res, next) {
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
-Util.buildClassificationGrid = async function(data){
+utilities.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
     grid = '<ul id="inv-display">'
@@ -60,7 +60,7 @@ Util.buildClassificationGrid = async function(data){
 /* **************************************
  * Build the vehicle detail view HTML
  * ************************************ */
-Util.formatVehicleDetailHTML = async function (vehicle) {
+utilities.formatVehicleDetailHTML = async function (vehicle) {
   if (!vehicle) return '<p class="notice">Sorry, no vehicle data available.</p>';
 
   const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -85,7 +85,7 @@ Util.formatVehicleDetailHTML = async function (vehicle) {
   `;
 };
 
-Util.handleErrors = function (fn) {
+utilities.handleErrors = function (fn) {
   return async (req, res, next) => {
     try {
       await fn(req, res, next);
@@ -95,4 +95,4 @@ Util.handleErrors = function (fn) {
   };
 };
 
-module.exports = Util;
+module.exports = utilities;
