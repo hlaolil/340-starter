@@ -19,11 +19,15 @@ router.post("/register", regValidate.registationRules(),
 // Process the login attempt
 router.post(
   "/login",
-  validate.loginRules(),
-  validate.checkLoginData,
-  (req, res) => {
-    res.status(200).send("login process")
-  }
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accController.accountLogin)
+)
+
+// Default account route
+router.get(
+  "/",
+  utilities.handleErrors(accController.accountManagement)
 )
 
 module.exports = router;
