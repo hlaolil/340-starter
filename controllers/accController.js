@@ -113,7 +113,7 @@ async function accountLogin(req, res) {
       return res.redirect("/accounts/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("accounts/login", {
         title: "Login",
         nav,
