@@ -555,3 +555,98 @@ form button {
 form button:hover {
   background-color: #0056b3;
 }
+
+/* General table styling */
+table {
+    width: 100%;
+    max-width: 800px; /* Limits table width for better readability */
+    margin: 20px auto; /* Centers table with spacing */
+    border-collapse: collapse; /* Removes gaps between cells */
+    font-family: Arial, sans-serif; /* Clean, modern font */
+    background-color: #fff; /* White background for table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Table header styling */
+th {
+    background-color: #2c3e50; /* Dark blue-gray header */
+    color: #fff; /* White text for contrast */
+    padding: 12px 15px; /* Comfortable padding */
+    text-align: left; /* Left-align headers */
+    font-weight: 600; /* Slightly bold headers */
+    text-transform: uppercase; /* Uppercase for emphasis */
+}
+
+/* Table row styling */
+tr {
+    border-bottom: 1px solid #ddd; /* Light gray row separator */
+}
+
+/* Table cell styling */
+td {
+    padding: 12px 15px; /* Consistent padding */
+    color: #333; /* Dark text for readability */
+}
+
+/* Alternating row colors for better readability */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #e6f3ff; /* Light blue hover effect */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Styling for Mechanic Special column (highlighting special status) */
+td:nth-child(2) {
+    color: #d63031; /* Red for Mechanic Special to draw attention */
+    font-weight: 500; /* Slightly bold */
+}
+
+/* Button styling for Modify and Delete */
+td a, td button {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-right: 5px;
+    text-decoration: none;
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth button hover */
+}
+
+/* Modify button */
+td a[href*="modify"], td button.modify {
+    background-color: #3498db; /* Blue for Modify */
+    color: #fff;
+}
+
+/* Delete button */
+td a[href*="delete"], td button.delete {
+    background-color: #e74c3c; /* Red for Delete */
+    color: #fff;
+}
+
+/* Button hover effects */
+td a[href*="modify"]:hover, td button.modify:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+td a[href*="delete"]:hover, td button.delete:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    table {
+        font-size: 14px; /* Smaller font for mobile */
+    }
+    th, td {
+        padding: 8px 10px; /* Reduced padding */
+    }
+    td a, td button {
+        padding: 6px 8px; /* Smaller buttons */
+        font-size: 12px;
+    }
+}
