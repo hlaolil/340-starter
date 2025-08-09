@@ -6,7 +6,8 @@ const {
   classificationRules,
   checkClassificationData,
   inventoryRules,
-  checkInventoryData
+  checkInventoryData,
+  checkUpdateData
 } = require("../utilities/inventory-validation")
 
 // View by classification
@@ -40,6 +41,8 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 
 //Edit inventory view
 router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView))
+
+router.post("/update/", invController.updateInventory, checkUpdateData, inventoryRules())
 
 module.exports = router
 

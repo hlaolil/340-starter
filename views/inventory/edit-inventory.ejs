@@ -15,7 +15,7 @@
   </ul>
 <% } %>
 
-<form action="/inv/edit" method="POST">
+<form action="/inv/update" method="POST">
   <input type="hidden" name="inv_id" value="<%= inv_id || '' %>">
 
   <label>Classification:</label>
@@ -49,4 +49,8 @@
   <input type="text" name="inv_color" value="<%= inv_color || '' %>" required>
 
   <button type="submit">Update Inventory</button>
+
+  <input type="hidden" name="inv_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
 </form>

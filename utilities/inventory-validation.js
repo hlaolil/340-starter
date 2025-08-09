@@ -50,6 +50,23 @@ const checkInventoryData = async (req, res, next) => {
   next()
 }
 
+const checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const classificationList = await utilities.buildClassificationList(req.body.classification_id, inv_id)
+    return res.status(400).render("inventory/edit-inventory", {
+      title: "Edit",
+      nav: res.locals.nav,
+      classificationList,
+      inv_id,
+      message: "There were errors in your submission.",
+      errors: errors.array(),
+      ...req.body
+    })
+  }
+  next()
+}
+
 const checkClassificationData = (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -68,6 +85,7 @@ module.exports = {
   inventoryRules,
   checkInventoryData,
   classificationRules,
-  checkClassificationData
+  checkClassificationData,
+  checkUpdateData
 } 
 
