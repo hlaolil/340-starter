@@ -28,7 +28,7 @@ async function getInventoryByClassificationId(classification_id) {
 /* ***************************
  *  Get specific inventory item by inv_id
  * ************************** */
-async function getVehicleById(inventoryId) {
+async function getVehicleById(inv_id) {
   try {
     const data = await pool.query(
       `SELECT 
@@ -40,10 +40,12 @@ async function getVehicleById(inventoryId) {
          inv_miles,
          inv_description,
          inv_image,
-         inv_color
+         inv_thumbnail,
+         inv_color,
+         classification_id
        FROM public.inventory
        WHERE inv_id = $1`,
-      [inventoryId]
+      [inv_id]
     );
     return data.rows[0] || null;
   } catch (error) {

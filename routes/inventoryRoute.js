@@ -39,7 +39,7 @@ router.post(
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 //Edit inventory view
-router.get('/edit/:inventory_id', utilities.handleErrors(invController.editInventoryView))
+router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView))
 
 module.exports = router
 

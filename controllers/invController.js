@@ -7,7 +7,7 @@ const invCont = {}
  *  Build inventory by classification view
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
-  const classification_id = req.params.classificationId
+  const classification_id = req.params.classification_id
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
@@ -23,8 +23,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Build inventory item detail view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
-  const inventoryId = req.params.inventoryId
-  const vehicle = await invModel.getVehicleById(inventoryId)
+  const inventoryId = req.params.inv_id
+  const vehicle = await invModel.getVehicleById(inv_id)
   let nav = await utilities.getNav()
 
   if (!vehicle) {
@@ -153,12 +153,13 @@ invCont.getInventoryJSON = async (req, res, next) => {
 invCont.editInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
-  const itemData = await invModel.getInventoryByClassificationId(inv_id)
+  const itemData = await invModel.getVehicleById(inv_id)
   const classificationList = await utilities.buildClassificationList(itemData.classification_id)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
+    message: req.flash("message"),
     classificationList: classificationList,
     errors: null,
     inv_id: itemData.inv_id,
