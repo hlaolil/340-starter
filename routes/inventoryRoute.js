@@ -42,7 +42,7 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 //Edit inventory view
 router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView))
 
-router.post("/update/", invController.updateInventory, checkUpdateData, inventoryRules())
+router.post("/update/", inventoryRules(), checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
 module.exports = router
 

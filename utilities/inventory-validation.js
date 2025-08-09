@@ -51,11 +51,12 @@ const checkInventoryData = async (req, res, next) => {
 }
 
 const checkUpdateData = async (req, res, next) => {
+  const inv_id = req.body.inv_id;  // get inv_id from form POST data
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     const classificationList = await utilities.buildClassificationList(req.body.classification_id, inv_id)
     return res.status(400).render("inventory/edit-inventory", {
-      title: "Edit",
+      title: "Edit Inventory",
       nav: res.locals.nav,
       classificationList,
       inv_id,
