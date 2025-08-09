@@ -28,7 +28,7 @@ async function getInventoryByClassificationId(classification_id) {
 /* ***************************
  *  Get specific inventory item by inv_id
  * ************************** */
-async function getVehicleById(inventoryId) {
+async function getVehicleById(inv_id) {
   try {
     const data = await pool.query(
       `SELECT 
@@ -40,10 +40,12 @@ async function getVehicleById(inventoryId) {
          inv_miles,
          inv_description,
          inv_image,
-         inv_color
+         inv_thumbnail,
+         inv_color,
+         classification_id
        FROM public.inventory
        WHERE inv_id = $1`,
-      [inventoryId]
+      [inv_id]
     );
     return data.rows[0] || null;
   } catch (error) {
@@ -90,4 +92,42 @@ async function addInventory(data) {
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory};
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *"
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ])
+    return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory, updateInventory};

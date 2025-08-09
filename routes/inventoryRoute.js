@@ -6,14 +6,15 @@ const {
   classificationRules,
   checkClassificationData,
   inventoryRules,
-  checkInventoryData
+  checkInventoryData,
+  checkUpdateData
 } = require("../utilities/inventory-validation")
 
 // View by classification
-router.get("/type/:classificationId", invController.buildByClassificationId)
+router.get("/type/:classification_id", invController.buildByClassificationId)
 
 // View specific inventory item
-router.get("/detail/:inventoryId", invController.buildByInventoryId)
+router.get("/detail/:inventory_id", invController.buildByInventoryId)
 
 // Management view
 router.get("/", utilities.handleErrors(invController.buildManagement))
@@ -35,6 +36,13 @@ router.post(
   checkInventoryData,
   utilities.handleErrors(invController.addInventory)
 )
+
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+//Edit inventory view
+router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView))
+
+router.post("/update/", inventoryRules(), checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
 module.exports = router
 

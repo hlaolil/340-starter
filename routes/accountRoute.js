@@ -26,7 +26,7 @@ router.post(
 
 // Default account route
 router.get(
-  "/",
+  "/", utilities.checkLogin,
   utilities.handleErrors(accController.accountManagement)
 )
 
