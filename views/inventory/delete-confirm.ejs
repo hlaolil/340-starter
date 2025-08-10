@@ -1,0 +1,40 @@
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+    <%- message %>
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<form action="/inv/delete" method="POST">
+
+  <label>Classification:</label>
+  <%- classificationList %>
+
+  <label>Make:</label>
+  <input type="text" name="inv_make" value="<%= inv_make || '' %>" required readonly>
+
+  <label>Model:</label>
+  <input type="text" name="inv_model" value="<%= inv_model || '' %>" required readonly>
+
+  <label>Year:</label>
+  <input type="number" name="inv_year" value="<%= inv_year || '' %>" required readonly>
+
+  <label>Price:</label>
+  <input type="number" step="0.01" name="inv_price" value="<%= inv_price || '' %>" required>
+
+  <button type="delete" disabled>Delete Inventory</button>
+
+  <input type="hidden" name="inv_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
+</form>
