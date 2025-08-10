@@ -127,17 +127,39 @@ async function accountLogin(req, res) {
   }
 }
 
-/* ****************************************
- *  Deliver account management view
- * ************************************ */
-async function accountManagement(req, res) {
+/* ***************************
+ *  Build Account Management view
+ * ************************** */
+async function accountManagement(req, res, next) {
   let nav = await utilities.getNav()
+  const accountData = res.locals.accountData // comes from JWT middleware
+  
   res.render("accounts/management", {
     title: "Account Management",
     nav,
     message: req.flash("notice")[0] || "",
-    errors: null
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_type: accountData.account_type,
+    account_id: accountData.account_id
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, accountManagement}
+/* ***************************
+ *  Build Update Account view
+ * ************************** */
+async function buildUpdateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const account_id = req.params.account_id
+  const accountData = await accountModel.getAccountById(account_id)
+
+  res.render("accounts/update-account", {
+    title: "Update Account",
+    nav,
+    message: req.flash("notice")[0] || "",
+    errors: null,
+    accountData
+  })
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, accountManagement, buildUpdateAccount}
