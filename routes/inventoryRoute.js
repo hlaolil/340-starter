@@ -46,5 +46,7 @@ router.get('/delete/:inv_id', utilities.handleErrors(invController.deleteInvento
 
 router.post("/update/", inventoryRules(), checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
+router.post("/delete/",  utilities.handleErrors(invController.deleteInventory))
+
 module.exports = router
 

@@ -19,6 +19,7 @@
 
   <label>Classification:</label>
   <%- classificationList %>
+  <input type="hidden" name="classification_id" value="<%= classification_id %>">
 
   <label>Make:</label>
   <input type="text" name="inv_make" value="<%= inv_make || '' %>" required readonly>
@@ -30,11 +31,9 @@
   <input type="number" name="inv_year" value="<%= inv_year || '' %>" required readonly>
 
   <label>Price:</label>
-  <input type="number" step="0.01" name="inv_price" value="<%= inv_price || '' %>" required>
+  <input type="number" step="0.01" name="inv_price" value="<%= inv_price || '' %>" required readonly>
 
-  <button type="delete" disabled>Delete Inventory</button>
+  <button type="submit">Delete Inventory</button>
 
-  <input type="hidden" name="inv_id"
-<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
-<% } %>>
+  <input type="hidden" name="inv_id" value="<%= inv_id %>">
 </form>
