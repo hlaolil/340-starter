@@ -153,5 +153,19 @@ utilities.checkJWTToken = (req, res, next) => {
   }
  }
 
+ utilities.checkAdmin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type
+    if (accountType === 'Admin' || accountType === 'Employee') {
+      return next()
+    } else {
+      req.flash('notice', 'You do not have permission to access that page.')
+      return res.redirect('/accounts/login')
+    }
+  } else {
+    req.flash('notice', 'Please log in to access that page.')
+    return res.redirect('/accounts/login')
+  }
+}
 
 module.exports = utilities;

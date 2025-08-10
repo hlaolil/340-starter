@@ -30,4 +30,10 @@ router.get(
   utilities.handleErrors(accController.accountManagement)
 )
 
+// Logout Route
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwt")
+  res.redirect("/")  // Redirect to home page after logout
+})
+
 module.exports = router;
