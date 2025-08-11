@@ -206,11 +206,11 @@ async function updatePassword(req, res, next) {
       res.redirect("/accounts/")
     } else {
       req.flash("notice", "Error updating password.")
-      res.redirect("/accounts/update/" + account_id)
+      res.redirect("/accounts/updatePassword/" + account_id)
     }
   } catch (error) {
     req.flash("notice", "Error processing password change.")
-    res.redirect("/accounts/update/" + account_id)
+    res.redirect("/accounts/updatePassword/" + account_id)
   }
 }
 
