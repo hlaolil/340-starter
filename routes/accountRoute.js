@@ -61,5 +61,8 @@ router.post(
   utilities.handleErrors(accController.updatePassword)
 )
 
+// Ensure logged in and authorized
+router.get("/view", utilities.checkLogin, utilities.checkAdmin, (accController.buildAccountsView))
+
 
 module.exports = router;

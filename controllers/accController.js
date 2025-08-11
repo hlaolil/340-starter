@@ -214,7 +214,26 @@ async function updatePassword(req, res, next) {
   }
 }
 
+/* ***************************
+ * Build accounts view
+ * ************************** */
+async function buildAccountsView(req, res, next) {
+  try {
+    let nav = await utilities.getNav();
+    const accounts = await accountModel.getAllAccounts();
+    res.render("accounts/accountsView", {
+      title: "View Accounts",
+      nav,
+      accounts,
+      errors: null
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
+  buildAccountsView,
   updateAccount,
   updatePassword,
  buildLogin, 

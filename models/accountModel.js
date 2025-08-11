@@ -159,8 +159,25 @@ async function updateAccountPassword(account_id, hashedPassword) {
   }
 }
 
+/* ***************************
+ * Get all accounts
+ * ************************** */
+async function getAllAccounts() {
+  try {
+    const result = await pool.query(
+      `SELECT account_id, account_firstname, account_lastname, account_email, account_type
+       FROM public.account
+       ORDER BY account_lastname, account_firstname`
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("getAllAccounts error:", error);
+    throw error;
+  }
+}
+
 module.exports = {
-  // existing exports...
+  getAllAccounts,
   getAccountById,
   updateAccountInfo,
   updateAccountPassword,
