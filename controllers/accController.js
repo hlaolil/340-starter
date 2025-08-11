@@ -127,17 +127,99 @@ async function accountLogin(req, res) {
   }
 }
 
-/* ****************************************
- *  Deliver account management view
- * ************************************ */
-async function accountManagement(req, res) {
+/* ***************************
+ *  Build Account Management view
+ * ************************** */
+async function accountManagement(req, res, next) {
   let nav = await utilities.getNav()
+  const accountData = res.locals.accountData // comes from JWT middleware
+  
   res.render("accounts/management", {
     title: "Account Management",
     nav,
     message: req.flash("notice")[0] || "",
-    errors: null
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_type: accountData.account_type,
+    account_id: accountData.account_id
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, accountManagement}
+/* ***************************
+ *  Build Update Account view
+ * ************************** */
+async function buildUpdateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const account_id = req.params.account_id
+  const accountData = await accountModel.getAccountById(account_id)
+
+  res.render("accounts/update-account", {
+    title: "Update Account",
+    nav,
+    message: req.flash("notice")[0] || "",
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_id: accountData.account_id
+  })
+}
+
+/* ***************************
+ * Process account info update
+ * ************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+  const updateResult = await accountModel.updateAccountInfo(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  )
+
+  if (updateResult) {
+    req.flash("notice", "Account information updated successfully.")
+    const updatedAccount = await accountModel.getAccountById(account_id)
+    res.locals.accountData = updatedAccount
+    res.redirect("/accounts/")
+  } else {
+    req.flash("notice", "Error updating account information.")
+    res.redirect("/accounts/update/" + account_id)
+  }
+}
+
+/* ***************************
+ * Process password change
+ * ************************** */
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_id, account_password } = req.body
+
+  try {
+    const hashedPassword = await bcrypt.hash(account_password, 10)
+    const updateResult = await accountModel.updateAccountPassword(account_id, hashedPassword)
+
+    if (updateResult) {
+      req.flash("notice", "Password updated successfully.")
+      res.redirect("/accounts/")
+    } else {
+      req.flash("notice", "Error updating password.")
+      res.redirect("/accounts/update/" + account_id)
+    }
+  } catch (error) {
+    req.flash("notice", "Error processing password change.")
+    res.redirect("/accounts/update/" + account_id)
+  }
+}
+
+module.exports = {
+  updateAccount,
+  updatePassword,
+ buildLogin, 
+ buildRegister, 
+ registerAccount, 
+ accountLogin, 
+ accountManagement, 
+ buildUpdateAccount}

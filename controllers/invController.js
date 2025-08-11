@@ -9,9 +9,20 @@ const invCont = {}
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classification_id
   const data = await invModel.getInventoryByClassificationId(classification_id)
-  const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
+
+  // If no data found, return 404
+  if (!data || data.length === 0) {
+    return res.status(404).render("errors/error", {
+      title: "Classification Not Found",
+      message: "No vehicles found for this classification.",
+      nav
+    })
+  }
+
+  const grid = await utilities.buildClassificationGrid(data)
   const className = data[0].classification_name
+
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
@@ -177,6 +188,33 @@ invCont.editInventoryView = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Build delete inventory view
+ * ************************** */
+invCont.deleteInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getVehicleById(inv_id)
+
+  // Disabled dropdown for delete view
+  const classificationList = await utilities.buildClassificationList(itemData.classification_id, true)
+
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    message: req.flash("message"),
+    classificationList: classificationList,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price,
+    classification_id: itemData.classification_id
+  })
+}
+
+/* ***************************
  *  Update Inventory Data
  * ************************** */
 invCont.updateInventory = async function (req, res, next) {
@@ -234,6 +272,27 @@ invCont.updateInventory = async function (req, res, next) {
     inv_color,
     classification_id
     })
+  }
+}
+
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+
+  // Only collect inv_id and make sure it's an integer
+  const inv_id = parseInt(req.body.inv_id)
+
+  // Call the model-based delete function
+  const deleteResult = await invModel.deleteInventory(inv_id)
+
+  if (deleteResult) {
+    req.flash("message", "The inventory item was successfully deleted.")
+    res.redirect("/inv/") // back to management view
+  } else {
+    req.flash("message", "Sorry, the delete failed.")
+    res.redirect(`/inv/delete/${inv_id}`) // rebuild delete confirmation view
   }
 }
 

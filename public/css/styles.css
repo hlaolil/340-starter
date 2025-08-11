@@ -650,3 +650,7 @@ td a[href*="delete"]:hover, td button.delete:hover {
         font-size: 12px;
     }
 }
+
+li {
+  list-style-type: none
+}

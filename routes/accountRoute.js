@@ -30,4 +30,36 @@ router.get(
   utilities.handleErrors(accController.accountManagement)
 )
 
+// Logout Route
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwt")
+  res.redirect("/")  // Redirect to home page after logout
+})
+
+// GET account update view
+router.get(
+  "/update/:account_id",
+  utilities.checkLogin,
+  utilities.handleErrors(accController.buildUpdateAccount)
+)
+
+// POST process account info update
+router.post(
+  "/update",
+  utilities.checkLogin,
+  validate.updateAccountRules(),
+  validate.checkUpdateData,
+  utilities.handleErrors(accController.updateAccountInfo)
+)
+
+// POST process password change
+router.post(
+  "/updatePassword",
+  utilities.checkLogin,
+  validate.passwordRules(),
+  validate.checkUpdateData,
+  utilities.handleErrors(accController.updateAccountPassword)
+)
+
+
 module.exports = router;

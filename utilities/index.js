@@ -100,11 +100,12 @@ utilities.handleErrors = function (fn) {
 /* **************************************
  * Build the classification <select> list
  * ************************************ */
-utilities.buildClassificationList = async function(classification_id = null) {
+utilities.buildClassificationList = async function(classification_id = null, disabled = false) {
   let data = await invModel.getClassifications()
   let classificationList =
-    '<select name="classification_id" id="classificationList" required>'
+    `<select name="classification_id" id="classificationList" required ${disabled ? "disabled" : ""}>`
   classificationList += "<option value=''>Choose a Classification</option>"
+
   data.rows.forEach((row) => {
     classificationList += `<option value="${row.classification_id}"`
     if (classification_id && row.classification_id == classification_id) {
@@ -112,6 +113,7 @@ utilities.buildClassificationList = async function(classification_id = null) {
     }
     classificationList += `>${row.classification_name}</option>`
   })
+
   classificationList += "</select>"
   return classificationList
 }
@@ -151,5 +153,19 @@ utilities.checkJWTToken = (req, res, next) => {
   }
  }
 
+ utilities.checkAdmin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type
+    if (accountType === 'Admin' || accountType === 'Employee') {
+      return next()
+    } else {
+      req.flash('notice', 'You do not have permission to access that page.')
+      return res.redirect('/accounts/login')
+    }
+  } else {
+    req.flash('notice', 'Please log in to access that page.')
+    return res.redirect('/accounts/login')
+  }
+}
 
 module.exports = utilities;
