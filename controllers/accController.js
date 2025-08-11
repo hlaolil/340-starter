@@ -183,10 +183,10 @@ async function updateAccount(req, res, next) {
     req.flash("notice", "Account information updated successfully.")
     const updatedAccount = await accountModel.getAccountById(account_id)
     res.locals.accountData = updatedAccount
-    res.redirect("/account/")
+    res.redirect("/accounts/")
   } else {
     req.flash("notice", "Error updating account information.")
-    res.redirect("/account/update/" + account_id)
+    res.redirect("/accounts/update/" + account_id)
   }
 }
 
@@ -203,14 +203,14 @@ async function updatePassword(req, res, next) {
 
     if (updateResult) {
       req.flash("notice", "Password updated successfully.")
-      res.redirect("/account/")
+      res.redirect("/accounts/")
     } else {
       req.flash("notice", "Error updating password.")
-      res.redirect("/account/update/" + account_id)
+      res.redirect("/accounts/update/" + account_id)
     }
   } catch (error) {
     req.flash("notice", "Error processing password change.")
-    res.redirect("/account/update/" + account_id)
+    res.redirect("/accounts/update/" + account_id)
   }
 }
 
