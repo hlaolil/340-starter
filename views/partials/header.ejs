@@ -5,8 +5,10 @@
     </h1>
     <div id="tools">
      <% if (typeof loggedin !== 'undefined' && loggedin && typeof accountData !== 'undefined') { %>
-      <li><a href="/accounts/" title="Account Management">Welcome <%= accountData.account_firstname %></a></li>
-      <li><a href="/accounts/logout" title="Logout">Logout</a></li>
+      <ul>
+        <li><a href="/accounts/" title="Account Management">Welcome <%= accountData.account_firstname %></a></li>
+        <li><a href="/accounts/logout" title="Logout">Logout</a></li>
+      </ul>
     <% } else { %>
       <li><a href="/accounts/" title="My Account">My Account</a></li>
     <% } %>
