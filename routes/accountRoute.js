@@ -49,7 +49,7 @@ router.post(
   utilities.checkLogin,
   validate.updateAccountRules(),
   validate.checkUpdateData,
-  utilities.handleErrors(accController.updateAccountInfo)
+  utilities.handleErrors(accController.updateAccount)
 )
 
 // POST process password change
@@ -58,7 +58,7 @@ router.post(
   utilities.checkLogin,
   validate.passwordRules(),
   validate.checkUpdateData,
-  utilities.handleErrors(accController.updateAccountPassword)
+  utilities.handleErrors(accController.updatePassword)
 )
 
 
