@@ -39,4 +39,6 @@ router.get("/logout", (req, res) => {
 // Update account info form
 router.get("/update/:account_id", utilities.checkLogin, accController.buildUpdateAccount)
 
+
+
 module.exports = router;

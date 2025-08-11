@@ -158,8 +158,68 @@ async function buildUpdateAccount(req, res, next) {
     nav,
     message: req.flash("notice")[0] || "",
     errors: null,
-    accountData
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_id: accountData.account_id
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, accountManagement, buildUpdateAccount}
+/* ***************************
+ * Process account info update
+ * ************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+  const updateResult = await accountModel.updateAccountInfo(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  )
+
+  if (updateResult) {
+    req.flash("notice", "Account information updated successfully.")
+    const updatedAccount = await accountModel.getAccountById(account_id)
+    res.locals.accountData = updatedAccount
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Error updating account information.")
+    res.redirect("/account/update/" + account_id)
+  }
+}
+
+/* ***************************
+ * Process password change
+ * ************************** */
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_id, account_password } = req.body
+
+  try {
+    const hashedPassword = await bcrypt.hash(account_password, 10)
+    const updateResult = await accountModel.updateAccountPassword(account_id, hashedPassword)
+
+    if (updateResult) {
+      req.flash("notice", "Password updated successfully.")
+      res.redirect("/account/")
+    } else {
+      req.flash("notice", "Error updating password.")
+      res.redirect("/account/update/" + account_id)
+    }
+  } catch (error) {
+    req.flash("notice", "Error processing password change.")
+    res.redirect("/account/update/" + account_id)
+  }
+}
+
+module.exports = {
+  updateAccount,
+  updatePassword,
+ buildLogin, 
+ buildRegister, 
+ registerAccount, 
+ accountLogin, 
+ accountManagement, 
+ buildUpdateAccount}
