@@ -13,6 +13,7 @@ body {
   flex-direction: column;
   background-color: #fff;
   color: #2c3e50;
+  margin: 2px;
 }
 
 main {
@@ -183,6 +184,11 @@ header,
 .upgrades-section,
 .reviews-section {
   margin-top: clamp(1.5rem, 5vw, 2rem);
+}
+
+.upgrades-section{
+  display: flex;
+  gap: 100px;
 }
 
 .upgrades-section h3,
@@ -376,6 +382,11 @@ color: #fff;
   .upgrade img {
     max-width: 60px;
   }
+
+  .upgrades-section{
+  display: flex;
+  gap: 50px;
+}
 }
 
 .notice {
@@ -653,4 +664,27 @@ td a[href*="delete"]:hover, td button.delete:hover {
 
 li {
   list-style-type: none
+}
+
+/* Button Group and Buttons */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem
+};
+
+/* Paragraphs */
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
 }
