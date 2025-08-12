@@ -1,33 +1,40 @@
-<table class="accounts-table">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if (accounts && accounts.length > 0) { %>
-      <% accounts.forEach(function(account) { %>
+<% if (accounts.length > 0) { %>
+  <table id="accounts-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>
+          Last Name <br>
+          <input
+            type="text"
+            id="search"
+            placeholder="Search..."
+            style="width: 100%;"
+          />
+        </th>
+        <th>Email</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% accounts.forEach(account => { %>
         <tr>
           <td><%= account.account_firstname %></td>
           <td><%= account.account_lastname %></td>
           <td><%= account.account_email %></td>
           <td><%= account.account_type %></td>
         </tr>
-      <% }); %>
-    <% } else { %>
-      <tr>
-        <td colspan="5" class="no-data">No accounts found.</td>
-      </tr>
-    <% } %>
-  </tbody>
+      <% }) %>
+    </tbody>
+  </table>
 
-     <!-- Action Buttons -->
-    <div class="actions">
-        <a href="/accounts/" class="btn">Back</a>
-    </div>
-</table>
+  <p id="account-count"><%= count %> accounts found</p>
+<% } else { %>
+  <p>No accounts found.</p>
+<% } %>
 
+<div class="actions">
+  <a href="/accounts" class="btn">Back</a>
+</div>
 
+<script src="/js/accountsView.js"></script>

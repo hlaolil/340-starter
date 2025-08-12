@@ -62,7 +62,7 @@ router.post(
 )
 
 // Ensure logged in and authorized
-router.get("/view", utilities.checkLogin, utilities.checkAdmin, (accController.buildAccountsView))
+router.get("/accountsView", utilities.checkLogin, utilities.checkAdmin, (accController.buildAccountsView))
 
 
 module.exports = router;

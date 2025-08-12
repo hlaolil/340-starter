@@ -176,7 +176,31 @@ async function getAllAccounts() {
   }
 }
 
+async function filterAccountsByLastName(lastName) {
+  const sql = `
+    SELECT account_firstname, account_lastname, account_email, account_type
+    FROM public.account
+    WHERE account_lastname = $1
+    ORDER BY account_lastname ASC
+  `;
+  const result = await pool.query(sql, [lastName]);
+  return result.rows;
+}
+
+async function getAllLastNames() {
+  const sql = `
+    SELECT DISTINCT account_lastname
+    FROM public.account
+    ORDER BY account_lastname ASC
+  `;
+  const result = await pool.query(sql);
+  return result.rows.map(row => row.account_lastname);
+}
+
+
 module.exports = {
+  filterAccountsByLastName,
+  getAllLastNames,
   getAllAccounts,
   getAccountById,
   updateAccountInfo,
