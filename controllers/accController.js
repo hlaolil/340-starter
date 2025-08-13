@@ -237,7 +237,9 @@ async function buildAccountsView(req, res, next) {
       lastNames,
       selectedLastName,
       count: accounts.length,
-      errors: null
+      message: req.flash("message"),
+      errors: null,
+      
     });
   } catch (err) {
     console.error("Error retrieving accounts:", err);
@@ -246,7 +248,27 @@ async function buildAccountsView(req, res, next) {
   }
 }
 
+// Handle delete
+async function deleteAccount(req, res) {
+  const { account_id } = req.body;
+  try {
+    const deleteResult = await accountModel.deleteAccount(account_id);
+    if (deleteResult) {
+      req.flash('notice', 'Account deleted successfully.');
+      res.redirect('/accounts/accountsView');
+    } else {
+      req.flash('error', 'Error deleting account.');
+      res.redirect('/accounts/accountsView');
+    }
+  } catch (error) {
+    console.error('Error in deleteAccount:', error);
+    req.flash('error', 'An error occurred while deleting the account.');
+    res.redirect('/accounts/accountsView');
+  }
+}
+
 module.exports = {
+  deleteAccount,
   buildAccountsView,
   updateAccount,
   updatePassword,
