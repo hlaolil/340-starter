@@ -214,7 +214,40 @@ async function updatePassword(req, res, next) {
   }
 }
 
+/* View accounts with optional last name filter */
+async function buildAccountsView(req, res, next) {
+  try {
+    let nav = await utilities.getNav();
+    let selectedLastName = req.query.account_lastname || "";
+    let accounts;
+
+    if (selectedLastName) {
+      accounts = await accountModel.filterAccountsByLastName(selectedLastName);
+    } else {
+      accounts = await accountModel.getAllAccounts();
+    }
+
+    // Get all distinct last names for filter dropdown
+    const lastNames = await accountModel.getAllLastNames();
+
+    res.render("accounts/accountsView", {
+      title: "View Accounts",
+      nav,
+      accounts,
+      lastNames,
+      selectedLastName,
+      count: accounts.length,
+      errors: null
+    });
+  } catch (err) {
+    console.error("Error retrieving accounts:", err);
+    req.flash("error", "Unable to retrieve accounts.");
+    res.redirect("/accounts/accountsView");
+  }
+}
+
 module.exports = {
+  buildAccountsView,
   updateAccount,
   updatePassword,
  buildLogin, 

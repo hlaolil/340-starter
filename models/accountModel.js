@@ -159,8 +159,49 @@ async function updateAccountPassword(account_id, hashedPassword) {
   }
 }
 
+/* ***************************
+ * Get all accounts
+ * ************************** */
+async function getAllAccounts() {
+  try {
+    const result = await pool.query(
+      `SELECT account_id, account_firstname, account_lastname, account_email, account_type
+       FROM public.account
+       ORDER BY account_lastname, account_firstname`
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("getAllAccounts error:", error);
+    throw error;
+  }
+}
+
+async function filterAccountsByLastName(lastName) {
+  const sql = `
+    SELECT account_firstname, account_lastname, account_email, account_type
+    FROM public.account
+    WHERE account_lastname = $1
+    ORDER BY account_lastname ASC
+  `;
+  const result = await pool.query(sql, [lastName]);
+  return result.rows;
+}
+
+async function getAllLastNames() {
+  const sql = `
+    SELECT DISTINCT account_lastname
+    FROM public.account
+    ORDER BY account_lastname ASC
+  `;
+  const result = await pool.query(sql);
+  return result.rows.map(row => row.account_lastname);
+}
+
+
 module.exports = {
-  // existing exports...
+  filterAccountsByLastName,
+  getAllLastNames,
+  getAllAccounts,
   getAccountById,
   updateAccountInfo,
   updateAccountPassword,
