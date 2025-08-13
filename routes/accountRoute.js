@@ -62,7 +62,11 @@ router.post(
 )
 
 // Ensure logged in and authorized
-router.get("/accountsView", utilities.checkLogin, utilities.checkAdmin, (accController.buildAccountsView))
+router.get("/accountsView", utilities.checkLogin, utilities.checkAdmin, utilities.handleErrors(accController.buildAccountsView))
 
+
+
+// Delete account
+router.post("/delete", utilities.checkAdmin, accController.deleteAccount);
 
 module.exports = router;

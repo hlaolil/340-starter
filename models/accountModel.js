@@ -197,8 +197,15 @@ async function getAllLastNames() {
   return result.rows.map(row => row.account_lastname);
 }
 
+async function deleteAccount(account_id) {
+  const sql = "DELETE FROM public.account WHERE account_id = $1";
+  const result = await pool.query(sql, [account_id]);
+  return result.rowCount > 0;
+}
+
 
 module.exports = {
+  deleteAccount,
   filterAccountsByLastName,
   getAllLastNames,
   getAllAccounts,
