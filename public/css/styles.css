@@ -569,7 +569,7 @@ form button:hover {
 
 /* General table styling */
 table {
-    width: 80%;
+    width: 100%;
     max-width: 800px; /* Limits table width for better readability */
     margin: 20px auto; /* Centers table with spacing */
     border-collapse: collapse; /* Removes gaps between cells */
@@ -652,6 +652,7 @@ td a[href*="delete"]:hover, td button.delete:hover {
 @media (max-width: 600px) {
     table {
         font-size: 14px; /* Smaller font for mobile */
+        width: 70%;
     }
     th, td {
         padding: 8px 10px; /* Reduced padding */
