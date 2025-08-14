@@ -569,7 +569,7 @@ form button:hover {
 
 /* General table styling */
 table {
-    width: 100%;
+    width: 80%;
     max-width: 800px; /* Limits table width for better readability */
     margin: 20px auto; /* Centers table with spacing */
     border-collapse: collapse; /* Removes gaps between cells */
