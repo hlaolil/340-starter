@@ -16,7 +16,7 @@ const {
 router.get("/type/:classification_id", invController.buildByClassificationId)
 
 // View specific inventory item
-router.get("/detail/:inventory_id", invController.buildByInventoryId)
+router.get("/detail/:inv_id", invController.buildByInventoryId)
 
 // Admin-only routes: Add middleware checkAdmin
 
