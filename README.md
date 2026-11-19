@@ -1,58 +1,59 @@
- Vehicle Inventory Management System
-A Node.js MVC-based web application for managing vehicle classifications, inventory items, and user accounts with authentication, form validation, and dynamic navigation.
+# CSE Motors — vehicle inventory management
 
-📋 Features
-User registration, login, and authentication (JWT-based).
+My CSE 340 (Web Backend Development) project at BYU–Pathway Worldwide: **CSE Motors**, a Node.js MVC web app for a car dealership. Visitors browse vehicles by classification. Staff and admins manage classifications, inventory items and accounts.
 
-Role-based access control for inventory management.
+## Features
 
-CRUD operations for vehicle classifications and inventory items.
+- **Accounts:** register, log in and out (JWT stored in a cookie, bcrypt password hashing), update personal details and change password.
+- **Roles:** only Employee and Admin accounts can manage inventory or see the account list.
+- **Inventory:** add classifications, then add, edit and delete vehicles with images and thumbnails.
+- **Navigation** is built from the classifications in the database.
+- **Validation:** server-side checks with express-validator, with sticky form data so nothing is lost on an error.
+- **Errors:** flash messages, a 404 page and an error page (`/trigger-error` tests it).
 
-Image and thumbnail handling for inventory.
+## Enhancement: account list with search
 
-Account management: update personal details & change password.
+The account list view (`/accounts/accountsView`, for Employee and Admin accounts) adds:
 
-Server-side form validation with sticky form data.
+- a last-name search that filters the table as you type,
+- a live count of matching accounts,
+- delete from the list.
 
-Dynamic navigation menu generated from database classifications.
+The account model gains query methods using prepared SQL statements. The controller passes the results to the view, handles errors, and checks the account type before showing anything.
 
-PostgreSQL database integration.
+## Built with
 
-🛠 Tech Stack
-Backend: Node.js, Express.js
+Node.js, Express, EJS (express-ejs-layouts), PostgreSQL (`pg`, `connect-pg-simple` for sessions), JSON Web Tokens, bcryptjs, express-validator, connect-flash and cookie-parser.
 
-Frontend: EJS templating, HTML, CSS, JavaScript
+## Project structure
 
-Database: PostgreSQL
+```
+server.js       Express app, sessions, JWT check, routes and error handlers
+controllers/    route logic (accounts, inventory, base)
+models/         database queries
+routes/         accountRoute.js (/accounts), inventoryRoute.js (/inv), static.js
+utilities/      navigation builder, validation rules, auth helpers
+views/          EJS templates (accounts/, inventory/, errors/, layouts/, partials/)
+public/         CSS, JavaScript and vehicle images
+database/       SQL for the schema, seed data and assignment queries
+```
 
-Authentication: JSON Web Tokens (JWT), bcrypt password hashing
+## Run it locally
 
-Validation: express-validator
+Requires Node.js and a PostgreSQL database.
 
-Other: dotenv, connect-flash, cookie-parser
+```bash
+pnpm install       # or npm install
+pnpm run dev       # restarts on changes
+```
 
-📂 Project Structure
-csharp
-Copy
-Edit
-project/
-│── controllers/       # Route logic
-│── models/            # Database queries
-│── routes/            # Route definitions
-│── utilities/         # Helper functions
-│── views/             # EJS templates
-│── public/            # Static assets
-│── database/          # SQL schema & seed files
-│── .env.example       # Example environment file
-│── README.md          # Project documentation
+Create `.env` with:
 
-# - The Enhencement Project
-This enhancement extends the existing account management system by adding an
-account list view with a dynamic last name search and real-time account count,
-improving how users query and interact with account data. It interacts directly with the
-database through the account model’s query methods to retrieve account records. The
-account controller is updated with new functions to support queries and pass data to the
-view. The account list view is enhanced to include the search input, dynamic table
-display, and live account count. The model uses prepared SQL statements and error
-handling in the controller to ensure robustness and data integrity. Access control is used
-to check that only admin roles can view accounts.
+| Variable | What |
+| --- | --- |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `SESSION_SECRET` | Secret for session cookies |
+| `ACCESS_TOKEN_SECRET` | Secret for signing JWTs |
+| `PORT`, `HOST` | Where the server listens |
+
+Build the database with `database/cs340-db.sql` before the first run.
